@@ -1,0 +1,28 @@
+<div class="projects-header">
+  <h1>Projects</h1>
+  <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= link_to project.title, project %></td>
+      <td><%= project.status.name %></td>
+      <td>
+        <%= link_to 'Edit', edit_project_path(project) %>
+        <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @projects %>
