@@ -1,0 +1,7 @@
+<% if activity.owner %>
+  <%= link_to activity.owner.email, activity.owner %>
+<% else %>
+  [Deleted User]
+<% end %>
+created project
+<%= link_to activity.trackable.title, activity.trackable %>
