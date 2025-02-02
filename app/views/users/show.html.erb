@@ -1,0 +1,5 @@
+<div class="container">
+  <h1><%= @user.email %></h1>
+  <p>Member since: <%= @user.created_at.to_formatted_s(:long) %></p>
+  <%= link_to 'Back', :back, class: 'btn btn-secondary' %>
+</div>

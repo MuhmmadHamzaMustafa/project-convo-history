@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
+  before_action :set_statuses, only: [:new, :edit, :update_status]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -15,14 +16,20 @@ class ProjectsController < ApplicationController
                     .page(params[:page] || 1)
   end
 
+  def update_status
+    if @project.update(status_id: params[:status_id])
+      redirect_to @project, notice: 'Status updated successfully'
+    else
+      redirect_to @project, alert: 'Error updating status'
+    end
+  end
+
   def new
     @project = current_user.projects.new
-    @statuses = Project.all_statuses
   end
 
   def create
     @project = current_user.projects.new(project_params)
-    @statuses = Project.all_statuses
 
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.'
@@ -39,7 +46,6 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to @project, notice: 'Project was successfully updated.'
     else
-      @statuses = Project.all_statuses
       render :edit
     end
   end
@@ -53,6 +59,10 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = current_user.projects.find(params[:id])
+  end
+
+  def set_statuses
+    @statuses = Project.all_statuses
   end
 
   def project_params

@@ -31,7 +31,10 @@ gem 'kaminari'       # Pagination
 gem 'rack-attack'    # Rate limiting (optional)
 gem 'slugify'
 gem 'public_activity'
+gem 'cancancan'
 
+# gem 'bootstrap', '~> 5.3'
+# gem 'importmap-rails'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
