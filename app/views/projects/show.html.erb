@@ -55,7 +55,7 @@
             </small>
           </div>
           <% if can? :destroy, comment %>
-            <%= link_to 'Delete', project_comment_path(@project, comment),
+            <%= button_to 'Delete', project_comment_path(@project, comment),
                         method: :delete,
                         class: 'btn btn-sm btn-outline-danger',
                         data: { confirm: 'Delete this comment?' } %>
